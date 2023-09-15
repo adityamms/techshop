@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import { CartContext } from "@/components/Cartcontext";
 import Barang_inside from "@/components/Barang_inside";
@@ -11,6 +11,8 @@ import HomeIcon from "@mui/icons-material/Home";
 export default function page() {
   const { cart, setCart } = useContext(CartContext);
 
+  const cartlocal = JSON.parse(localStorage.getItem("Cart_item"));
+
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
@@ -18,7 +20,7 @@ export default function page() {
     }).format(number);
   };
 
-  const total = cart.reduce(
+  const total = cartlocal.reduce(
     (acc, { id, jumlah_barang }) =>
       acc + jumlah_barang * product.find((x) => x.id === id).harga_barang,
     0
@@ -33,8 +35,8 @@ export default function page() {
         </Link>
       </div>
       <div className="p-10 grid gap-10">
-        {cart &&
-          cart.map((item) => {
+        {cartlocal &&
+          cartlocal.map((item) => {
             return <Barang_inside data={item} key={item.id} />;
           })}
       </div>

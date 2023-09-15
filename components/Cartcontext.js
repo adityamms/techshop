@@ -1,11 +1,21 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, createContext } from "react";
 
 export const CartContext = createContext(null);
 
 export default function Cartcontext({ children }) {
   const [cart, setCart] = useState([]);
+
+  // Convert the cart array to a JSON string
+  const itemnya = JSON.stringify(cart);
+
+  useEffect(() => {
+    // Store the JSON string in localStorage with a specified key ("Cart_item")
+    localStorage.setItem("Cart_item", itemnya);
+  }, [cart]);
+
+  console.log(JSON.parse(itemnya));
 
   function masuk(id) {
     setCart((prev) => {
