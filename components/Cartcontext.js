@@ -15,8 +15,6 @@ export default function Cartcontext({ children }) {
     localStorage.setItem("Cart_item", itemnya);
   }, [cart]);
 
-  console.log(JSON.parse(itemnya));
-
   function masuk(id) {
     setCart((prev) => {
       // Check if the item with the specified id exists in the cart

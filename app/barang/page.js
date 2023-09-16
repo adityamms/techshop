@@ -10,8 +10,8 @@ import HomeIcon from "@mui/icons-material/Home";
 
 export default function page() {
   const { cart, setCart } = useContext(CartContext);
-
-  const cartlocal = JSON.parse(localStorage.getItem("Cart_item"));
+  let cari = localStorage.getItem("Cart_item");
+  const cartlocal = JSON.parse(cari || "[]");
 
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
