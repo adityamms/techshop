@@ -1,18 +1,17 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { useContext } from "react";
-import { CartContext } from "@/components/Cartcontext";
 import Barang_inside from "@/components/Barang_inside";
 import { product } from "@/components/product";
 import Link from "next/link";
 import HomeIcon from "@mui/icons-material/Home";
 
 export default function page() {
-  const { cart, setCart } = useContext(CartContext);
-  let cari = localStorage.getItem("Cart_item");
-  const cartlocal = JSON.parse(cari || "[]");
+  let cari;
 
+  if (typeof window !== "undefined") {
+    cari = localStorage.getItem("Cart_item");
+  }
+  const cartlocal = JSON.parse(cari || "[]");
   const rupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
